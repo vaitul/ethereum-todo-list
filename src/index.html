@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>Ethereum To-Do List</title>
+        <style>
+            body{
+                padding:0px !important;
+                margin:0px !important;
+                font-size:large !important;
+            }
+            h1{
+                background-color:black;
+                color:white;
+                margin:0;
+                text-align:center;
+                padding:10px;
+            }
+            .content{
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                flex-direction:column;
+                padding:10px;
+            }
+            .new-btn{
+                font-size:large;
+                border-radius:3px;
+                border:1px solid #000;
+                box-shadow:1px 1px 3px #aaa;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Ethereum To Do List</h1>
+
+        <div class="content">
+            <button class="new-btn" onclick="newTaskClicked()">Add new task</button>
+            <hr/>
+            <div class="task-list">
+            </div>
+        </div>
+
+        <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>    
+        <script>
+            const TASK_LIST = document.querySelector(".task-list");
+
+            const createtaskHtml = (id,content,completed) =>{
+                return `     
+                    <label>
+                        <input onChange="taskStatusChanged(${id},this)" type="checkbox" ${completed ? "checked=true" : ""}}/>
+                        ${content}
+                    </label>
+                    <hr/>
+                `;
+            }
+
+            const taskStatusChanged = (id,event) => {
+                console.log(id,event);
+            }
+            const newTaskClicked = () => {
+                const content = prompt("Enter task content");
+                if(content){
+                    TASK_LIST.innerHTML = (createtaskHtml(Date.now(),content,false))
+                }
+            }
+
+            TASK_LIST.innerHTML = createtaskHtml(1,"VAitul",false);
+
+        </script>    
+    <body>
+</html>
